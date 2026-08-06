@@ -2,7 +2,7 @@
 
 A single-page, animation-rich developer portfolio built with vanilla HTML, CSS, and JavaScript — styled with Tailwind CSS (CDN) and finished with custom glassmorphism, particle backgrounds, and micro-interactions.
 
-**Live demo:** _add your deployed link here_
+**Live demo:** https://portfolio-omega-tawny-poysgo3idi.vercel.app/
 
 [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](./LICENSE)
 
