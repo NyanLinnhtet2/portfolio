@@ -2767,32 +2767,11 @@
         opacity: 0.3;
       }
 
-      /* Show glitch layers with low opacity by default, and increase on touch/click */
+      /* Glitch layers work on mobile too */
       .cosmic-avatar .glitch-rgb-layer,
       .cosmic-avatar .glitch-scanlines,
       .cosmic-avatar .glitch-flicker {
-        opacity: 0.15 !important;
-        transition: opacity 0.3s ease;
-      }
-
-      /* When glitch-active class is added (via JS on touch/click), boost opacity */
-      .cosmic-avatar.glitch-active .glitch-rgb-layer,
-      .cosmic-avatar.glitch-active .glitch-scanlines,
-      .cosmic-avatar.glitch-active .glitch-flicker {
-        opacity: 0.6 !important;
-      }
-
-      .cosmic-avatar.glitch-active .glitch-rgb-layer {
-        animation: glitchShift 0.12s steps(1) infinite;
-      }
-
-      .cosmic-avatar.glitch-active .glitch-scanlines {
-        opacity: 1 !important;
-      }
-
-      .cosmic-avatar.glitch-active .glitch-flicker {
-        opacity: 1 !important;
-        animation: glitchFlicker 0.12s ease-in-out 4;
+        display: block !important;
       }
     }
   </style>
