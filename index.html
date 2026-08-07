@@ -2767,11 +2767,32 @@
         opacity: 0.3;
       }
 
-      /* Ensure glitch layers stay visible on interaction */
+      /* Show glitch layers with low opacity by default, and increase on touch/click */
       .cosmic-avatar .glitch-rgb-layer,
       .cosmic-avatar .glitch-scanlines,
       .cosmic-avatar .glitch-flicker {
-        display: block !important;
+        opacity: 0.15 !important;
+        transition: opacity 0.3s ease;
+      }
+
+      /* When glitch-active class is added (via JS on touch/click), boost opacity */
+      .cosmic-avatar.glitch-active .glitch-rgb-layer,
+      .cosmic-avatar.glitch-active .glitch-scanlines,
+      .cosmic-avatar.glitch-active .glitch-flicker {
+        opacity: 0.6 !important;
+      }
+
+      .cosmic-avatar.glitch-active .glitch-rgb-layer {
+        animation: glitchShift 0.12s steps(1) infinite;
+      }
+
+      .cosmic-avatar.glitch-active .glitch-scanlines {
+        opacity: 1 !important;
+      }
+
+      .cosmic-avatar.glitch-active .glitch-flicker {
+        opacity: 1 !important;
+        animation: glitchFlicker 0.12s ease-in-out 4;
       }
     }
   </style>
@@ -4249,8 +4270,19 @@
           isDragging = false;
         });
 
+        // ── Mobile Glitch Activation ──
+        function activateGlitch() {
+          avatar.classList.add('glitch-active');
+          setTimeout(() => {
+            avatar.classList.remove('glitch-active');
+          }, 800);
+        }
+
+        // On touch/click, trigger glitch
         avatar.addEventListener('touchstart', (e) => {
           e.preventDefault();
+          activateGlitch();
+
           const touch = e.touches[0];
           const rect = avatar.getBoundingClientRect();
           const x = touch.clientX - rect.left;
@@ -4294,7 +4326,10 @@
           }, 300);
         }, { passive: true });
 
+        // Click for desktop and also trigger glitch (for both desktop & mobile)
         avatar.addEventListener('click', () => {
+          activateGlitch();
+
           container.querySelectorAll('.ripple-wave').forEach(el => el.remove());
 
           const ripple = document.createElement('div');
